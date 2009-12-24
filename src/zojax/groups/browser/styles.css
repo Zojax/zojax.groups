@@ -1,0 +1,121 @@
+/* zrt-cssregistry: */
+
+@media all {
+
+  .groups-manager {
+    padding-top: 2em;
+  }
+
+  .groups-group {
+    padding: 1em;
+    border-bottom: borderWidth borderStyleAnnotations globalBorderColor;
+  }
+
+  .groups-group.groups-header {
+    padding-top: 0.3em;
+    padding-bottom: 0.3em;
+    color: globalExtraColor;
+    background: globalBackgroundColor;
+    font-size: 90%;
+  }
+
+  .groups-group.groups-header dd {
+    margin-bottom: 0;
+  }
+
+  .groups-group dt {
+    float: left;
+    padding-right: 1.5em;
+    text-align: center;
+    width: 130px;
+    font-size: 90%;
+    font-weight: normal;
+    overflow: hidden;
+  }
+
+  .groups-group dt img {
+    height: auto;
+    width: 100%;
+    padding-bottom: 0.25em;
+  }
+
+  .groups-group dd { 
+    overflow: hidden;
+  }
+
+  .groups-group dd a:visited {
+    color: linkColor;
+  }
+  
+  .groups-group dd { 
+    white-space: normal;
+    overflow: hidden;
+  }
+
+  .groups-group dd h4 {
+    font-size: 140%;
+    font-weight: normal;
+  }
+
+  .groups-group dd h4 span {
+    font-size: 80%;
+  }
+
+  .groups-group dd .groups-group-byline { 
+    font-size: 90%;
+    color: discreetColor;
+  }
+
+  .portlet-group-overview div { 
+    padding-bottom: 0.25em;
+  }
+
+  .portlet-group-overview .group-image {
+    padding: 0.5em;
+  }
+
+  .portlet-group-overview .group-image img { 
+    width: 100%;
+    height: auto;
+    padding-bottom: 0.25em;
+  }
+
+  .portlet-group-overview-content .group-image div {
+    padding-bottom: 0.25em;
+  }
+
+  .portlet-group-overview-content .group-image { 
+    width: 230px;
+    float: left;
+  }
+
+  .portlet-group-overview-content .group-image-wrapper {
+    padding: 0 1.5em 1em 0;
+  }
+
+  .portlet-group-overview-content .group-image img {
+    width: 100%;
+    height: auto;
+    padding: 2px;
+    margin-bottom: 1em;
+    border: 1px solid globalBorderColor;
+  }
+
+  .portlet-group-recentlyjoined div.t-avatar { 
+    float: left;
+    padding-right: 0.5em;
+    width: 32px;
+    text-align: center;
+  }
+
+  .portlet-group-recentlyjoined .t-avatar img {
+    padding: 2px;
+    width: 27px;
+    height: auto;
+    border: 1px solid globalBorderColor;
+  }
+
+  .z-table .notification { 
+    text-align: center;
+  }
+}

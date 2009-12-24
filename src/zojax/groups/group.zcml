@@ -1,0 +1,71 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.groups">
+
+  <zojax:content
+     title="Group"
+     name="content.group"
+     description="Group of members"
+     schema=".interfaces.IGroup"
+     class=".group.Group"
+     containers="workspace.groups"
+     type="zojax.content.type.interfaces.IActivePortalType"
+     contains="zojax.content.space.interfaces.ISpaceContentType"
+     permission="zojax.AddGroup" />
+
+  <class class=".group.Group">
+    <implements interface="zojax.activity.interfaces.IActivityAware" />
+    <implements interface="zojax.ownership.interfaces.IOwnerAware" />
+    <implements interface="zojax.extensions.interfaces.IExtensible" />
+    <implements interface="zojax.catalog.interfaces.ISearchContext" />
+    <implements interface="zojax.content.type.interfaces.ITitleBasedName" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements
+       interface="zojax.content.type.interfaces.IContainerContentsAware" />
+    <implements interface="zojax.content.space.interfaces.IContentSpaceLayout" />
+    <implements interface="zojax.content.tagging.interfaces.IContentTaggable" />
+    <implements
+       interface="zojax.content.draft.browser.interfaces.ILocationContainer" />
+
+    <require
+       permission="zope.View"
+       interface=".interfaces.IGroup
+		  zojax.content.space.interfaces.IContentSpaceLayout
+		  zojax.content.space.interfaces.IWorkspacesManagement" />
+
+    <require
+       permission="zojax.AccessGroup"
+       interface="zope.app.container.interfaces.IReadContainer" />
+
+    <require
+       permission="zojax.ModifyContent"
+       set_schema=".interfaces.IGroup
+		   zojax.content.space.interfaces.IContentSpaceLayout
+		   zojax.content.space.interfaces.IWorkspacesManagement"
+       interface="zope.app.container.interfaces.IWriteContainer" />
+  </class>
+
+  <subscriber handler=".group.groupModified" />
+
+  <adapter factory=".group.GroupCopier" />
+  <adapter factory=".group.GroupSearchableText" />
+
+  <!-- draft -->
+  <zojax:draft
+     content="content.group"
+     publish="zojax.AddGroup"
+     submit="zojax.SubmitGroup" />
+
+  <!-- overview workspace -->
+  <adapter
+     name="overview"
+     factory=".overview.OverviewWorkspaceFactory" />
+
+  <class class=".overview.OverviewWorkspaceFactory">
+    <require
+       permission="zojax.AccessGroup"
+       interface="zojax.content.space.interfaces.IOverviewWorkspace" />
+  </class>
+
+</configure>

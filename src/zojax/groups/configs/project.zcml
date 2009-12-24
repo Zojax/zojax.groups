@@ -1,0 +1,68 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   zcml:condition="installed zojax.project">
+
+  <include package="zojax.project" />
+
+  <!-- tasks notifications -->
+  <adapter 
+     name="tasks"
+     for="..interfaces.IGroup"
+     factory="zojax.project.notifications.notifications.TasksNotification" />
+
+  <adapter
+     name="assigneetasks"
+     for="..interfaces.IGroup"
+     factory="zojax.project.notifications.notifications.AssigneeTasksNotification" />
+
+  <adapter 
+     name="milestones"
+     for="..interfaces.IGroup"
+     factory="zojax.project.notifications.notifications.MilestonesNotification" />
+
+  <!-- default group permissions -->
+  <permissions for="..interfaces.IGroup" name="group.permissions">
+    <denyAll permission="zojax.AddProject" />
+    <denyAll permission="zojax.SubmitProject" />
+  </permissions>
+
+  <!-- 'open' group -->
+  <permissions name="group.open">
+    <grant
+       role="group.Manager"
+       permission="zojax.AddProject" />
+
+    <grant
+       role="group.Member"
+       permission="zojax.SubmitProject" />
+  </permissions>
+
+  <!-- 'members' group -->
+  <permissions name="group.members">
+    <grant
+       role="group.Manager"
+       permission="zojax.AddProject" />
+
+    <grant
+       role="group.Member"
+       permission="zojax.SubmitProject" />
+  </permissions>
+
+  <!-- 'private' group -->
+  <permissions name="group.private">
+    <grant
+       role="group.Manager
+	     group.Member"
+       permission="zojax.AddProject" />
+  </permissions>
+
+  <!-- 'secret' group -->
+  <permissions name="group.secret">
+    <grant
+       role="group.Manager
+	     group.Member"
+       permission="zojax.AddProject" />
+  </permissions>
+
+</configure>

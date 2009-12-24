@@ -1,0 +1,41 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.groups">
+
+  <zojax:content
+     title="Groups"
+     name="workspace.groups"
+     schema=".interfaces.IGroups"
+     class=".workspace.GroupsWorkspace"
+     contains="content.group"
+     type="zojax.content.type.interfaces.IInactiveType
+	   zojax.content.space.interfaces.ISpaceContentType"
+     containers="zojax.content.space.interfaces.IRootSpaceType"
+     permission="zojax.ModifyContent" />
+
+  <class class=".workspace.GroupsWorkspace">
+    <implements interface="zojax.extensions.interfaces.IExtensible" />
+    <implements interface="zojax.catalog.interfaces.ISearchContext" />
+    <implements interface="zojax.content.type.interfaces.IRenameNotAllowed" />
+    <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+    <implements interface="zojax.content.type.interfaces.IUnremoveableContent" />
+    <implements interface="zojax.content.type.interfaces.IContainerContentsAware" />
+
+    <require
+       permission="zope.View"
+       interface="zojax.content.type.interfaces.IItem
+		  zope.app.container.interfaces.IReadContainer" />
+
+    <require
+       permission="zojax.ModifyContent"
+       set_schema="zojax.content.type.interfaces.IItem"
+       interface="zope.app.container.interfaces.IWriteContainer" />
+  </class>
+
+  <!-- groups workspace factory -->
+  <adapter
+     name="groups"
+     factory=".workspace.GroupsWorkspaceFactory" />
+
+</configure>

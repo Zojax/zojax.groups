@@ -1,0 +1,58 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   zcml:condition="installed zojax.content.documents">
+
+  <include package="zojax.content.documents" file="permissions.zcml" />
+
+  <!-- documents workspace factory for groups -->
+  <adapter
+     name="documents"
+     for="..interfaces.IGroup"
+     factory="zojax.content.documents.workspace.DocumentsFactory" />
+
+  <!-- default group permissions -->
+  <permissions for="zojax.groups.interfaces.IGroup" name="group.permissions">
+    <denyAll permission="zojax.AddDocuments" />
+    <denyAll permission="zojax.SubmitDocuments" />
+  </permissions>
+
+  <!-- 'open' group -->
+  <permissions name="group.open">
+    <grant
+       role="group.Manager"
+       permission="zojax.AddDocuments" />
+
+    <grant
+       role="group.Member"
+       permission="zojax.SubmitDocuments" />
+  </permissions>
+
+  <!-- 'members' group -->
+  <permissions name="group.members">
+    <grant
+       role="group.Manager"
+       permission="zojax.AddDocuments" />
+
+    <grant
+       role="group.Member"
+       permission="zojax.SubmitDocuments" />
+  </permissions>
+
+  <!-- 'private' group -->
+  <permissions name="group.private">
+    <grant
+       role="group.Manager
+	     group.Member"
+       permission="zojax.AddDocuments" />
+  </permissions>
+
+  <!-- 'secret' group -->
+  <permissions name="group.secret">
+    <grant
+       role="group.Manager
+	     group.Member"
+       permission="zojax.AddDocuments" />
+  </permissions>
+
+</configure>

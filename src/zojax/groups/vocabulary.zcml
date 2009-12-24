@@ -1,0 +1,12 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope">
+
+  <utility
+     name="zojax.group.yourgroups"
+     factory=".vocabulary.YourGroupsVocabulary" />
+
+  <utility
+     name="zojax.group.invitablegroups"
+     factory=".vocabulary.YourInvitableGroupsVocabulary" />
+
+</configure>

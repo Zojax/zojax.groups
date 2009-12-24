@@ -1,0 +1,216 @@
+##############################################################################
+#
+# Copyright (c) 2009 Zope Foundation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: zojax.teamfolder\n"
+"POT-Creation-Date: Tue Oct 21 14:12:03 2008\n"
+"PO-Revision-Date: 2008-10-21 15:03+0600\n"
+"Last-Translator: Nikolay Kim <fafhrd91@gmail.com>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/teamfolder/browser/configure.zcml:25
+msgid "Change basic team attributes."
+msgstr "Изменить основные параметры."
+
+#: src/zojax/teamfolder/browser/configure.zcml:40
+msgid "Team members"
+msgstr "Участники команды"
+
+#: src/zojax/teamfolder/browser/configure.zcml:40
+msgid "You can change members of this team."
+msgstr "Здесь вы можете изменить список участников."
+
+#: src/zojax/teamfolder/browser/configure.zcml:65
+msgid "Add team folder"
+msgstr "Добавить папку команд"
+
+#: src/zojax/teamfolder/browser/configure.zcml:73
+msgid "A Team folder"
+msgstr ""
+
+#: src/zojax/teamfolder/browser/configure.zcml:73
+msgid "Team Folder"
+msgstr ""
+
+#: src/zojax/teamfolder/browser/members.pt:14
+msgid "Current group members"
+msgstr "Текущие участники группы"
+
+#: src/zojax/teamfolder/browser/members.pt:16
+msgid "There are no assigned members in this group."
+msgstr "В группе нет участников"
+
+#: src/zojax/teamfolder/browser/members.pt:2
+msgid "Members of the group"
+msgstr "Участники группы"
+
+#: src/zojax/teamfolder/browser/members.pt:20
+msgid "Team Members Listing"
+msgstr ""
+
+#: src/zojax/teamfolder/browser/members.pt:24
+msgid "User/Team"
+msgstr ""
+
+#: src/zojax/teamfolder/browser/members.pt:25
+msgid "Type"
+msgstr "Тип"
+
+#: src/zojax/teamfolder/browser/members.pt:45
+msgid "Remove"
+msgstr "Удалить"
+
+#: src/zojax/teamfolder/browser/members.pt:53
+msgid "Add new team members"
+msgstr "Добавить новых участников"
+
+#: src/zojax/teamfolder/browser/members.pt:62
+msgid "Add"
+msgstr "Добавить"
+
+#: src/zojax/teamfolder/browser/members.pt:8
+msgid "You can add or remove groups and users from this particular group here. Note that this doesn't actually delete the group or user, it is only removed from this group."
+msgstr ""
+
+#: src/zojax/teamfolder/browser/members.py:103
+msgid "Principals have been added to group."
+msgstr "Участники добавлены в группу"
+
+#: src/zojax/teamfolder/browser/members.py:55
+msgid "Principal"
+msgstr ""
+
+#: src/zojax/teamfolder/browser/members.py:56
+msgid "Select principal to view/edit."
+msgstr "Выбирите пользователя для просмотра/редактирования."
+
+#: src/zojax/teamfolder/browser/members.py:80
+msgid "Principals have been removed."
+msgstr "Участники удалены."
+
+#: src/zojax/teamfolder/browser/members.py:86
+msgid "Please select principal."
+msgstr "Выбирите участника."
+
+#: src/zojax/teamfolder/browser/teamadd.py:29
+msgid "Team Name"
+msgstr "Имя Команды"
+
+#: src/zojax/teamfolder/browser/teamadd.py:30
+msgid "Enter Team Name that will be displayed in the system."
+msgstr "Введите имя команды которое будет использоватся в системе."
+
+#: src/zojax/teamfolder/browser/teamadd.py:34
+msgid "Team Description"
+msgstr "Описание команды"
+
+#: src/zojax/teamfolder/browser/teamadd.py:35
+msgid "Enter Team Description that will be displayed in the system."
+msgstr "Введите описание команды которое будет использоватся в системе."
+
+#: src/zojax/teamfolder/browser/teamadd.py:42
+#: src/zojax/teamfolder/team.zcml:6
+msgid "Create new team"
+msgstr "Создать новую команду"
+
+#: src/zojax/teamfolder/browser/teamedit.py:31
+#: src/zojax/teamfolder/browser/configure.zcml:25
+msgid "Modify team"
+msgstr "Изменить команду"
+
+#: src/zojax/teamfolder/browser/teamedit.py:43
+msgid "Changes has been saved."
+msgstr "Изменения сохранены."
+
+#: src/zojax/teamfolder/browser/teaminfo.pt:4
+msgid "&bull; Team"
+msgstr "&bull; Команда"
+
+#: src/zojax/teamfolder/browser/teaminfo.pt:8
+msgid "&bull; Leaders"
+msgstr "&bull; Лидеры"
+
+#: src/zojax/teamfolder/configure.zcml:12
+msgid "Team member"
+msgstr "Участник команды"
+
+#: src/zojax/teamfolder/configure.zcml:15
+msgid "Add team"
+msgstr "Добавить команду"
+
+#: src/zojax/teamfolder/configure.zcml:19
+msgid "This permission allow manage team members."
+msgstr ""
+
+#: src/zojax/teamfolder/configure.zcml:19
+msgid "Manage team"
+msgstr ""
+
+#: src/zojax/teamfolder/configure.zcml:9
+msgid "Team leader"
+msgstr "Лидер команды"
+
+#: src/zojax/teamfolder/factory.py:42
+#: src/zojax/teamfolder/team.zcml:6
+msgid "Team"
+msgstr "Команда"
+
+#: src/zojax/teamfolder/factory.py:43
+msgid "Create new team."
+msgstr "Создать новую команду."
+
+#: src/zojax/teamfolder/interfaces.py:32
+msgid "Group leaders"
+msgstr "Лидеры группы"
+
+#: src/zojax/teamfolder/interfaces.py:39
+msgid "Leaders"
+msgstr "Лидеры"
+
+#: src/zojax/teamfolder/interfaces.py:40
+msgid "Team leaders"
+msgstr "Лидеры команды"
+
+#: src/zojax/teamfolder/interfaces.py:50
+msgid "Title"
+msgstr "Заголовок"
+
+#: src/zojax/teamfolder/namechooser.py:103
+msgid "Ids must contain only printable 7-bit non-space ASCII characters"
+msgstr ""
+
+#: src/zojax/teamfolder/namechooser.py:108
+msgid "Ids can't be more than 100 characters long."
+msgstr ""
+
+#: src/zojax/teamfolder/plugin.py:33
+msgid "Teams"
+msgstr "Команды"
+
+#: src/zojax/teamfolder/plugin.py:66
+msgid "Team folder (zojax)"
+msgstr "Модуль работы с командами"
+
+#: src/zojax/teamfolder/plugin.py:67
+msgid "Team same as group but it has leaders who can manage this team."
+msgstr "Команда это тоже самое что и группа, только команда может иметь лидеров которые могут изменять участников команды."
+
+#: src/zojax/teamfolder/plugin.zcml:6
+msgid "Team folder"
+msgstr "Папка с командами"
+

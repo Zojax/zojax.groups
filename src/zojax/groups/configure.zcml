@@ -1,0 +1,50 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:i18n="http://namespaces.zope.org/i18n"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.groups">
+
+  <!-- permissions declarations -->
+  <include file="permissions.zcml" />
+
+  <!-- group declarations -->
+  <include file="group.zcml" />
+
+  <!-- group members -->
+  <include file="members.zcml" />
+
+  <!-- groups workspace declaration -->
+  <include file="workspace.zcml" />
+
+  <!-- vocabularies -->
+  <include file="vocabulary.zcml" />
+
+  <!-- capabilities -->
+  <include file="capability.zcml" />
+
+  <!-- browser views -->
+  <include package=".browser" />
+
+  <!-- portlets -->
+  <include package=".portlets" />
+
+  <!-- packages configs -->
+  <include package=".configs" />
+
+  <!-- translations -->
+  <i18n:registerTranslations directory="locales"/>
+
+  <!-- member joined activity -->
+  <class class=".activity.MemberJoinedActivityRecord">
+    <require
+       permission="zope.Public"
+       interface="zojax.members.interfaces.IMemberJoinedActivityRecord" />
+  </class>
+
+  <!-- generations -->
+  <utility
+     name="zojax.groups"
+     provides="zope.app.generations.interfaces.ISchemaManager"
+     component=".generations.schemaManager" />
+
+</configure>

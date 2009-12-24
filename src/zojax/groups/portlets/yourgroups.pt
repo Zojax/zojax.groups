@@ -1,0 +1,15 @@
+<div class="z-portlet portlet-yourgroups" i18n:domain="zojax.groups">
+
+  <h2 class="z-portlet-header" i18n:translate="">Your groups</h2>
+
+  <div class="z-portlet-body">
+    <div tal:repeat="group context/getGroups"
+	 tal:attributes="class python:repeat['group'].odd() and 'z-portlet-item even'
+			 or 'z-portlet-item odd'">
+      
+      <a href="#" tal:attributes="href string:${group/name}/"
+	 tal:content="group/title"></a>
+      <div tal:content="group/description"></div>
+    </div>
+  </div>
+</div>

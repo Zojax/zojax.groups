@@ -1,0 +1,85 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.groups">
+
+  <include package="zojax.permissionsmap" file="meta.zcml" />
+  <include package="zojax.content.permissions" file="meta.zcml" />
+  <include package="zojax.content.discussion" file="permissions.zcml" />
+
+  <!-- permissions -->
+  <permission
+     id="zojax.AddGroup"
+     title="Add group"
+     description="Allow create new groups." />
+
+  <permission
+     id="zojax.SubmitGroup"
+     title="Submit group"
+     description="Allow submit new groups."/>
+
+  <permission
+     id="zojax.AccessGroup"
+     title="Access group"
+     description="Allow access current group."/>
+
+  <zojax:permission
+     permission="zojax.AddGroup"
+     category="zojax.content.permissions.interfaces.IAddPermission" />
+
+  <zojax:permission
+     permission="zojax.SubmitGroup"
+     category="zojax.content.permissions.interfaces.ISubmitPermission" />
+
+  <!-- default group permissions -->
+  <permissions for=".interfaces.IGroup" name="group.permissions">
+    <grant permission="zojax.ModifyContent
+		       zojax.ModifyMembersSettings"
+	   role="group.Manager" />
+
+    <grant permission="zojax.AddComment"
+	   role="group.Member
+		 group.Manager" />
+  </permissions>
+
+  <!-- 'open' group -->
+  <permissions name="group.open" title="Open group type">
+    <grantAll permission="zojax.AddComment" />
+    <grantAll permission="zojax.AccessGroup" />
+  </permissions>
+
+  <!-- 'members' group -->
+  <permissions name="group.members" title="Members group type">
+    <grantAll permission="zojax.AccessGroup" />
+  </permissions>
+
+  <!-- 'private' group -->
+  <permissions name="group.private" title="Private group type">
+    <denyAll permission="zojax.AccessGroup" />
+    <grant permission="zojax.AccessGroup"
+	   role="zope.Manager
+		 group.Member
+		 group.Manager" />
+  </permissions>
+
+  <!-- 'secret' group -->
+  <permissions name="group.secret" title="Secret group type">
+    <grant permission="zope.View"
+	   role="zope.Manager
+		 group.Member
+		 group.Manager" />
+
+    <denyAll permission="zope.View" />
+    <grant permission="zope.View"
+	   role="zope.Manager
+		 group.Member
+		 group.Manager" />
+
+    <denyAll permission="zojax.AccessGroup" />
+    <grant permission="zojax.AccessGroup"
+	   role="zope.Manager
+		 group.Member
+		 group.Manager" />
+  </permissions>
+
+</configure>

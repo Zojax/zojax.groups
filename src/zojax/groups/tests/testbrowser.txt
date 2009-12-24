@@ -1,0 +1,247 @@
+=====
+Group
+=====
+
+  >>> from zope import component, interface, event
+  >>> from zope.interface.verify import verifyClass, verifyObject
+  >>> from zope.testbrowser.testing import Browser
+  >>> from zope.app.component.hooks import setSite
+  >>> from zope.app.component.site import LocalSiteManager
+  >>> from zope.app.testing.functional import getRootFolder
+  >>> from zope.app.security.interfaces import IAuthentication
+  >>> from zope.security.management import newInteraction, endInteraction
+  >>> from zope.lifecycleevent import ObjectCreatedEvent
+  >>> from zope.publisher.browser import TestRequest
+  >>> from zope.app.intid import IntIds
+  >>> from zope.app.intid.interfaces import IIntIds
+  >>> from zope.publisher.browser import TestRequest
+  >>> from zojax.catalog.catalog import Catalog, ICatalog
+  >>> from zojax.ownership.interfaces import IOwnerAware, IOwnership
+  >>> from zojax.authentication.interfaces import IAuthenticationConfiglet
+  >>> from zojax.portlet.interfaces import IPortletManager, ENABLED
+  >>> from zojax.groups.tests.content import Portal
+  >>> from zojax.groups import interfaces
+
+  >>> root = getRootFolder()
+  >>> setSite(root)
+  >>> sm = root.getSiteManager()
+  >>> interface.alsoProvides(root, IOwnerAware)
+
+  >>> root['ids'] = IntIds()
+  >>> sm.registerUtility(root['ids'], IIntIds)
+
+  >>> root['catalog'] = Catalog()
+  >>> sm.registerUtility(root['catalog'], ICatalog)
+
+  >>> authconfiglet = sm.getUtility(IAuthenticationConfiglet)
+  >>> authconfiglet.installUtility()
+
+  >>> sm.getUtility(IAuthentication)._caching = False
+
+  >>> portal = Portal()
+  >>> event.notify(ObjectCreatedEvent(portal))
+  >>> root['portal'] = portal
+  >>> root['portal'].setSiteManager(LocalSiteManager(portal))
+
+  >>> auth = sm.getUtility(IAuthentication)
+  >>> request = TestRequest()
+  >>> request.setPrincipal(auth.getPrincipal('zope.mgr'))
+
+  >>> endInteraction()
+  >>> newInteraction(request)
+
+  >>> portlets = sm.queryMultiAdapter(
+  ...     (portal, TestRequest(), None), IPortletManager, 'columns.left')
+  >>> portlets.status = ENABLED
+  >>> portlets.portletIds = ('portlet.actions',)
+  >>> endInteraction()
+
+  >>> actor = Browser()
+  >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+  >>> actor.handleErrors = False
+
+
+Groups management
+=================
+
+
+Add groups
+----------
+
+  >>> actor.open("http://localhost/portal/context.html/content/")
+  >>> actor.getLink('Workspaces').click()
+  >>> actor.getControl(name="workspaces.widgets.workspaces:list").value = ['groups', 'people']
+  >>> actor.getControl(name="content.edit.buttons.save").click()
+
+  >>> actor.open("http://localhost/portal/groups/")
+  >>> print actor.contents
+  <html>
+  ...
+  ...<h1>Groups</h1>
+  <div class="z-page-description"></div>
+  <div>
+     No groups have been created.
+  </div>
+  ...
+  </html>
+
+
+Add group
+---------
+
+  >>> actor.open("http://localhost/portal/groups/")
+  >>> actor.getLink('Add Group').click()
+  >>> actor.getControl('Title').value = u'Group'
+  >>> actor.getControl('Short Name').value = u'group'
+  >>> actor.getControl('Publish').click()
+
+  >>> actor.url
+  'http://localhost/portal/groups/group/'
+
+  >>> print actor.contents
+  <html>
+  ...
+  <h1>Group</h1>
+  ...
+  </html>
+
+
+  >>> group = root['portal']['groups']['group']
+
+  >>> verifyObject(interfaces.IGroup, group)
+  True
+
+  >>> list(group.members.principals)
+  [u'zope.mgr']
+
+  >>> list(group.members.managers)
+  ['zope.mgr']
+
+
+  >>> member = group.members['zope.mgr']
+  >>> verifyObject(interfaces.IGroupMember, member)
+  True
+
+  >>> member.title
+  u'Manager'
+
+  >>> member.principal
+  <...principalregistry.Principal ...>
+
+
+Edit group
+----------
+
+  >>> actor.getLink('Edit Group').click()
+  >>> actor.open('http://localhost/portal/groups/group/context.html/content/')
+  >>> actor.getControl('Title').value = u'Development Group'
+  >>> actor.getControl(name="content.edit.buttons.save").click()
+  >>> actor.getLink('View').click()
+  >>> print actor.contents
+  <html>
+  ...
+  <h1>Development Group</h1>
+  ...
+  </html>
+
+
+Browse groups
+-------------
+
+  >>> actor.open('http://localhost/portal/groups/')
+  >>> print actor.contents
+  <html>
+  ...
+  <div class="groups-manager">
+    <div class="groups-group even">
+       <dl>
+          <dt>
+             <a href="http://localhost/portal/groups/group/" title="Development Group">
+                <img src="http://localhost/portal/@@/groupEmptyImage.png" />
+             </a>
+          </dt>
+          <dd>
+            <h4>
+              <a href="http://localhost/portal/groups/group/" title="">Development Group</a>
+            </h4>
+            <div class="groups-group-description"></div>
+            <div class="groups-group-byline">
+              1 Member(s),
+              Created on
+              ...
+              <br />
+              Open Group
+           </div>
+         </dd>
+       </dl>
+       <div class="visualClear"></div>
+    </div>
+  </div>
+  ...
+  </html>
+
+  >>> actor.getControl('Search for a group').click()
+  >>> print actor.contents
+  <html>
+  ...Please enter one or more words for search...
+  </html>
+
+  >>> actor.getControl(name="form.searchText").value = u'Development'
+  >>> actor.getControl('Search for a group').click()
+  >>> print actor.contents
+  <html>
+  ...
+  <div class="groups-manager">
+    <div class="groups-group even">
+          <dl>
+        <dt>
+          <a href="http://localhost/portal/groups/group/" title="Development Group">
+            <img src="http://localhost/portal/@@/groupEmptyImage.png" />
+          </a>
+        </dt>
+        <dd>
+          <h4>
+            <a href="http://localhost/portal/groups/group/" title="">Development Group</a>
+          </h4>
+          <div class="groups-group-description"></div>
+          <div class="groups-group-byline">
+            1 Member(s),
+            Created on
+            ...        
+            <br />
+            Open Group
+          </div>
+        </dd>
+      </dl>
+      <div class="visualClear"></div>
+    </div>
+  </div>
+  ...
+  </html>
+
+  >>> actor.getControl(name="form.searchText").value = u'unknown'
+  >>> actor.getControl('Search for a group').click()
+  >>> print actor.contents
+  <html>
+  ...Groups are not found...
+  </html>
+
+
+Remove group
+------------
+
+  >>> actor.open('http://localhost/portal/groups/group/')
+
+  >>> actor.getLink('Delete Group').click()
+  >>> actor.getControl('Delete').click()
+
+
+Remove groups
+-------------
+
+  >>> actor.open("http://localhost/portal/context.html/content/")
+  >>> actor.getLink('Workspaces').click()
+  >>> actor.getControl(name="workspaces.widgets.workspaces:list").value = ['people']
+  >>> actor.getControl(name="content.edit.buttons.save").click()
+ 
+  >>> setSite(None)

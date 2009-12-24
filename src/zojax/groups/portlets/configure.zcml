@@ -1,0 +1,89 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.groups">
+
+  <!-- groups portlet managers -->
+  <zojax:portletManager
+     name="columns.left"
+     for="..interfaces.IGroups"
+     title="Groups workspace left column"
+     schema=".interfaces.IGroupsLeftPortletManager"
+     class="zojax.portlet.manager.PortletManagerWithStatus" />
+
+  <zojax:portletManager
+     name="columns.right"
+     for="..interfaces.IGroups"
+     title="Groups workspace right column"
+     schema=".interfaces.IGroupsRightPortletManager"
+     class="zojax.portlet.manager.PortletManagerWithStatus" />
+
+  <!-- group portlet managers -->
+  <zojax:portletManager
+     name="columns.left"
+     for="..interfaces.IGroup"
+     title="Group left column"
+     schema=".interfaces.IGroupLeftPortletManager"
+     class="zojax.portlet.manager.PortletManagerWithStatus" />
+
+  <zojax:portletManager
+     name="columns.right"
+     for="..interfaces.IGroup"
+     title="Group right column"
+     schema=".interfaces.IGroupRightPortletManager"
+     class="zojax.portlet.manager.PortletManagerWithStatus" />
+
+  <!-- central column portlets -->
+  <zojax:portletManager
+     name="columns.content"
+     title="Group content column"
+     for="..interfaces.IGroup"
+     schema=".interfaces.IGroupContentPortletManager"
+     provides="zojax.content.space.portlets.interfaces.IContentPortletsManager"
+     class="zojax.portlet.manager.PortletManagerWithStatus" />
+
+  <!-- group info portlet -->
+  <zojax:portlet
+     title="Group overview"
+     for="..interfaces.IGroup"
+     name="portlet.groupoverview"
+     description="Basic group information (logo, members, group type, etc)."
+     class=".overview.GroupOverviewPortlet"
+     schema=".interfaces.IGroupOverviewPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="overviewsmall.pt"
+     for=".interfaces.IGroupOverviewPortlet" />
+
+  <!-- group info portlet -->
+  <zojax:portlet
+     title="Group overview"
+     for="..interfaces.IGroup"
+     name="portlet.groupoverview"
+     description="Basic group information (logo, members, group type, etc)."
+     class=".overview.GroupOverviewPortlet"
+     manager="zojax.content.space.portlets.interfaces.IContentPortletsManager"
+     schema=".interfaces.IGroupOverviewContentPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="overviewcontent.pt"
+     for=".interfaces.IGroupOverviewContentPortlet" />
+
+  <!-- my groups portlet -->
+  <zojax:portlet
+     title="Your Groups"
+     name="portlet.yourgroups"
+     for="..interfaces.IGroups"
+     description="List of groups."
+     class=".yourgroups.YourGroupsPortlet"
+     schema=".interfaces.IYourGroupsPortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="yourgroups.pt"
+     for=".interfaces.IYourGroupsPortlet" />
+
+</configure>
