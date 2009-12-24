@@ -1,0 +1,64 @@
+<tal:block i18n:domain="zojax.groups">
+<h1 i18n:translate="">Groups</h1>
+<div class="z-page-description" tal:content="context/description"></div>
+
+<div tal:condition="not:view/hasGroups" i18n:translate="">
+  No groups have been created.
+</div>
+
+<form action="index.html" method="post" tal:condition="view/hasGroups">
+  <input type="text" name="form.searchText" 
+	 tal:attributes="value request/form.searchText|nothing" />
+  <input type="submit" class="z-form-button"
+	 name="form.search" value="Search for a group" />
+  <input type="submit" class="z-form-cancelbutton"
+	 name="form.search.clear" value="Clear"
+	 tal:condition="request/form.searchText|nothing" />
+</form>
+
+<div class="groups-manager" tal:condition="view/hasGroups">
+  <tal:block content="structure view/batch/@@pagelet/batch.view" />
+
+  <tal:block tal:repeat="uid view/batch"
+	     tal:define="url context/@@absolute_url">
+    <div class="groups-group"
+	 tal:define="info python:view.getGroupInfo(uid);
+		     userurl string:$url/${uid/__name__}"
+	 tal:condition="info"
+	 tal:attributes="class python:repeat['uid'].odd() 
+			 and 'groups-group odd' or 'groups-group even'">
+      <dl>
+	<dt>
+	  <a tal:attributes="href string:$userurl/; title info/title">
+	    <img tal:condition="info/default"
+		 tal:attributes="src context/++resource++groupEmptyImage.png" />
+	    <img tal:condition="not:info/default"
+		 tal:attributes="src string:$url/${uid/__name__}/++attribute++logo" />
+	  </a>
+	</dt>
+	<dd>
+	  <h4>
+	    <a tal:attributes="href string:$userurl/; title info/description"
+	       tal:content="info/title"></a>
+	  </h4>
+	  <div class="groups-group-description" tal:content="info/description"></div>
+	  <div class="groups-group-byline">
+	    <tal:block content="info/members"/> Member(s),
+	    Created on
+	    <tal:block content="structure formatter:date,medium:info/created" />
+	    <tal:block condition="not:info/created">Unknown</tal:block>
+	    <br />
+	    <tal:block content="info/gtype/title" />
+	  </div>
+	</dd>
+      </dl>
+      <div class="visualClear"></div>
+    </div>
+  </tal:block>
+
+  <tal:block condition="not:view/batch">
+    Groups are not found.
+  </tal:block>
+
+</div>
+</tal:block>

@@ -1,0 +1,41 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.groups">
+
+  <class class=".members.Member">
+    <implements interface="zojax.content.type.interfaces.IRenameNotAllowed" />
+
+    <require
+       permission="zope.View"
+       interface="zojax.members.interfaces.IMember" />
+  </class>
+
+  <class class=".members.Members">
+    <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+    <implements interface="zojax.content.type.interfaces.IContainerContentsAware" />
+
+    <require
+       permission="zope.View"
+       interface="zojax.members.interfaces.IMembers
+		  zojax.content.type.interfaces.IItem
+		  zope.app.container.interfaces.IReadContainer" />
+    <require
+       permission="zojax.ModifyContent"
+       set_schema="zojax.members.interfaces.IMembers"
+       interface="zojax.members.interfaces.IMemberRoleManagement
+		  zope.app.container.interfaces.IWriteContainer" />
+    <require
+       permission="zojax.InviteGroupMember"
+       attributes="invite" />
+  </class>
+
+  <!-- invitation -->
+  <zojax:content
+     name="invitation.group"
+     title="Group invitation"
+     schema=".invitation.IGroupInvitation"
+     class=".invitation.GroupInvitation"
+     type="zojax.content.type.interfaces.IInactiveType" />
+
+</configure>

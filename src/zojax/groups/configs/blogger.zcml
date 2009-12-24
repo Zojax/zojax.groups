@@ -1,0 +1,55 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   zcml:condition="installed zojax.blogger">
+
+  <include package="zojax.blogger" />
+
+  <!-- blogger workspace factory -->
+  <registerIn registry="zojax.product.blogger">
+    <adapter
+       name="blog"
+       for="..interfaces.IGroup"
+       factory="zojax.blogger.workspace.BloggerWorkspaceFactory" />
+  </registerIn>
+  
+  <!-- default group permissions -->
+  <permissions for="zojax.groups.interfaces.IGroup" name="group.permissions">
+    <denyAll permission="zojax.AddBlogPost" />
+    <denyAll permission="zojax.SubmitBlogPost" />
+  </permissions>
+
+  <!-- 'open' group -->
+  <permissions name="group.open">
+    <grant role="group.Manager"
+	   permission="zojax.AddBlogPost" />
+    <grant role="group.Member"
+	   permission="zojax.SubmitBlogPost" />
+  </permissions>
+
+  <!-- 'members' group -->
+  <permissions name="group.members">
+    <grant 
+       role="group.Member
+	     group.Manager"
+       permission="zojax.AddBlogPost" />
+  </permissions>
+  
+  <!-- 'private' group -->
+  <permissions name="group.private">
+    <grant 
+       role="group.Member
+	       group.Manager"
+       permission="zojax.AddBlogPost" />
+  </permissions>
+  
+  <!-- 'secret' group -->
+  <permissions name="group.secret">
+    <grant
+       role="group.Member
+	     group.Manager"
+       permission="zojax.AddBlogPost" />
+  </permissions>
+  
+</configure>

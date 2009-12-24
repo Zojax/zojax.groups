@@ -1,0 +1,88 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.groups">
+
+  <!-- browse groups -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IGroups" />
+
+  <zojax:pagelet
+     name="index.html"
+     for="..interfaces.IGroups"
+     template="browse.pt"
+     class=".browse.BrowseGroups"
+     permission="zope.View" />
+
+  <!-- space view -->
+  <browser:defaultView
+     name="index.html"
+     for="..interfaces.IGroup" />
+
+  <zojax:pagelet
+     name="index.html"
+     for="..interfaces.IGroup"
+     layout="portal"
+     template="group.pt"
+     class=".group.GroupView"
+     permission="zope.View" />
+
+  <!-- overview workspace -->
+  <zojax:pagelet
+     name="overview"
+     for="..interfaces.IGroup"
+     template="overview.pt"
+     provides="zojax.content.space.interfaces.IOverviewWorkspace"
+     permission="zope.View" />
+
+  <!-- invite action -->
+  <adapter
+     name="groups.invite"
+     factory=".invitation.InviteMemberAction" />
+
+  <browser:icon
+     name="zmi_icon"
+     for=".interfaces.IInviteMemberAction"
+     file="icons/group.png" />
+
+  <zojax:pagelet
+     name="groupinvite.html"
+     for="zojax.preferences.interfaces.IRootPreferences"
+     class=".invitation.InviteMemberForm"
+     permission="zope.Public" />
+
+  <!-- icons -->
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.content.content_group"
+     file="icons/group.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="zojax.content.workspace_groups"
+     file="icons/group.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IGroup"
+     file="icons/group.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IGroups"
+     file="icons/group.png" />
+
+  <browser:icon
+     name="zmi_icon"
+     for="..interfaces.IGroupsWorkspaceFactory"
+     file="icons/group.png" />
+
+  <!-- styles -->
+  <zojax:resourceinclude
+     name="zojax-groups.css"
+     file="styles.css"
+     library="zojax" type="stylesheet" filetype="zrt" />
+
+</configure>

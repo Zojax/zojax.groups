@@ -1,0 +1,26 @@
+<div class="z-portlet portlet-group-overview-content" i18n:domain="zojax.groups">
+  <div class="z-portlet-body" tal:define="info context/getGroupInfo">
+    <div class="group-image" tal:condition="context/showLogo">
+      <div class="group-image-wrapper">
+	<img tal:condition="info/default"
+	     tal:attributes="src context/++resource++groupEmptyImage.png" />
+	<img tal:condition="not:info/default"
+	     tal:attributes="src string:${context/context/@@absolute_url}/++attribute++logo" />
+	<div><tal:block content="info/members"/> Member(s) </div>
+	<div tal:condition="info/owner"><strong i18n:translate="">Owned by:</strong>
+	  <tal:block content="info/owner/title" /></div>
+        <div><strong i18n:translate="">Created:</strong>
+	  <tal:block content="structure formatter:date,medium:info/created" /></div>
+	<div><strong i18n:translate="">Group Type:</strong>
+	  <tal:block content="info/gtype/title" /></div>
+      </div>
+    </div>
+
+    <div class="z-content-description" tal:condition="info/description"
+	 tal:content="info/description"></div>
+
+    <div tal:content="structure info/group/text/cooked" />
+  </div>
+</div>
+<div class="visualClear"></div>
+<br />

@@ -1,0 +1,63 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   zcml:condition="installed zojax.contenttype.newsitem">
+
+  <include package="zojax.contenttypes" />
+  <include package="zojax.contenttype.newsitem" />
+
+  <!-- news workspace factory for groups -->
+  <registerIn registry="zojax.product.zojax-contenttypes">
+    <adapter
+       name="news"
+       for="zojax.groups.interfaces.IGroup"
+       factory="zojax.contenttype.newsitem.workspace.NewsWorkspaceFactory" />
+  </registerIn>
+
+  <!-- 'open' group -->
+  <permissions name="group.open" title="Open group type">
+    <denyAll permission="zojax.contenttype.AddNewsItem" />
+    <denyAll permission="zojax.contenttype.SubmitNewsItem" />
+
+    <grant
+       role="group.Manager"
+       permission="zojax.contenttype.AddNewsItem" />
+    <grant 
+       role="group.Member"
+       permission="zojax.contenttype.SubmitNewsItem" />
+  </permissions>
+
+  <!-- 'members' group -->
+  <permissions name="group.members" title="Members group type">
+    <denyAll permission="zojax.contenttype.AddNewsItem" />
+    <denyAll permission="zojax.contenttype.SubmitNewsItem" />
+
+    <grant 
+       role="group.Member
+	     group.Manager"
+       permission="zojax.contenttype.AddNewsItem" />
+  </permissions>
+
+  <!-- 'private' group -->
+  <permissions name="group.private" title="Private group type">
+    <denyAll permission="zojax.contenttype.AddNewsItem" />
+    <denyAll permission="zojax.contenttype.SubmitNewsItem" />
+
+    <grant 
+       role="group.Member
+	     group.Manager"
+       permission="zojax.contenttype.AddNewsItem" />
+  </permissions>
+
+  <!-- 'secret' group -->
+  <permissions name="group.secret" title="Secret group type">
+    <denyAll permission="zojax.contenttype.AddNewsItem" />
+    <denyAll permission="zojax.contenttype.SubmitNewsItem" />
+
+    <grant 
+       role="group.Member
+	     group.Manager"
+       permission="zojax.contenttype.AddNewsItem" />
+  </permissions>
+
+</configure>

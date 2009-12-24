@@ -1,0 +1,52 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zcml="http://namespaces.zope.org/zcml"
+   zcml:condition="installed zojax.forum">
+
+  <include package="zojax.forum" />
+  <include package="zojax.forum" file="permissions.zcml" />
+
+  <!-- forum workspace -->
+  <registerIn registry="zojax.product.zojax-forum">
+    <adapter
+       name="forum"
+       for="..interfaces.IGroup"
+       factory="zojax.forum.workspace.ForumWorkspaceFactory" />
+
+    <adapter
+       name="forums"
+       for="..interfaces.IGroup"
+       factory="zojax.forum.workspace.ForumsWorkspaceFactory" />
+  </registerIn>
+
+  <!-- default group permissions -->
+  <permissions for="zojax.groups.interfaces.IGroup" name="group.permissions">
+    <denyAll permission="zojax.forum.AddTopic
+			 zojax.forum.AddMessage
+			 zojax.forum.SubmitTopic
+			 zojax.forum.SubmitMessage
+			 zojax.forum.ManageMessage" />
+
+    <grant role="group.Manager"
+	   permission="zojax.forum.AddTopic
+		       zojax.forum.SubmitTopic
+		       zojax.forum.AddMessage
+		       zojax.forum.SubmitMessage
+		       zojax.forum.ManageMessage" />
+
+    <grant role="group.Member"
+	   permission="zojax.forum.AddTopic
+		       zojax.forum.AddMessage" />
+  </permissions>
+
+  <!-- 'open' group -->
+  <permissions name="group.open">
+    <grantAll permission="zojax.forum.AddMessage" />
+
+    <deny role="group.Member"
+	  permission="zojax.forum.AddTopic" />
+    <grant role="group.Member"
+	   permission="zojax.forum.SubmitTopic" />
+  </permissions>
+
+</configure>
