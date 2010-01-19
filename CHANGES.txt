@@ -1,64 +1,8 @@
-=======
-CHANGES
-=======
-
-0.3.4 (2009-11-24)
+1.0.2 (Unreleased)
 ------------------
 
-- Mark 'Member invitation' content type as inactive type
 
-
-0.3.3 (2009-11-09)
+1.0.1 (2010-01-19)
 ------------------
 
-- Added 'forums' workspace
-
-
-0.3.2 (2009-08-27)
-------------------
-
-- Update tests
-
-
-0.3.1 (2009-08-21)
-------------------
-
-- Added workspaces management support
-
-- Update styles
-
-
-0.3.0 (2009-08-12)
-------------------
-
-- Use title based namechooser for groups
-
-- Active portal type to group added
-
-- Update test for chameleon enabled setup
-
-
-0.2.0 (2009-06-25)
-------------------
-
-- Move members related code to zojax.members package
-
-- Use newer personal profile api
-
-- Show groups title for workspace tab
-
-- Allow add members to group only by site manager
-
-- Added wiki support
-
-- Portlet managers change to with status
-
-- Fix interface field labels
-
-- Copyright changed to 'Zope Foundation and Contributors'
-
-
-0.1.0 (2009-05-05)
-------------------
-
-- Initial release
+- zojax initial release
