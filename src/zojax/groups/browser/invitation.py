@@ -87,7 +87,7 @@ class InviteMemberForm(PageletForm):
     def getContent(self):
         principal = IPersonalProfile(self.context.__principal__).title
         mytitle = IPersonalProfile(self.request.principal).title
-        return {'message': u'Hello %s,\n\nJoin to my groups!\n\nRegards,\n%s'%(
+        return {'message': u'Hello %s,\n\nI would like to invite you to join this group(s)\n\nRegards,\n%s'%(
                 principal, mytitle)}
 
     @button.buttonAndHandler(_(u'Invite'), provides=interfaces.IAddButton)
