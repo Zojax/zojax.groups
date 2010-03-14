@@ -31,6 +31,7 @@ from zojax.content.space.interfaces import IWorkspacesManagement
 from zojax.content.permissions.utils import updatePermissions
 from zojax.permissionsmap.interfaces import IObjectPermissionsMapsManager
 from zojax.members.interfaces import IMembersAware
+from zojax.members.members import Members
 
 from interfaces import IGroup
 
@@ -54,6 +55,10 @@ class Group(ContentContainer):
 
     @property
     def members(self):
+        if 'members' not in self:
+            members = Members()
+            event.notify(ObjectCreatedEvent(members))
+            self['members'] = members
         return self['members']
 
     def isEnabled(self, workspaceFactory):
