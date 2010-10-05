@@ -34,12 +34,13 @@
   <!-- default group permissions -->
   <permissions for=".interfaces.IGroup" name="group.permissions">
     <grant permission="zojax.ModifyContent
-		       zojax.ModifyMembersSettings"
-	   role="group.Manager" />
+           zojax.DeleteContent
+           zojax.ModifyMembersSettings"
+     role="group.Manager" />
 
     <grant permission="zojax.AddComment"
-	   role="group.Member
-		 group.Manager" />
+     role="group.Member
+     group.Manager" />
   </permissions>
 
   <!-- 'open' group -->
@@ -57,29 +58,29 @@
   <permissions name="group.private" title="Private group type">
     <denyAll permission="zojax.AccessGroup" />
     <grant permission="zojax.AccessGroup"
-	   role="zope.Manager
-		 group.Member
-		 group.Manager" />
+     role="zope.Manager
+     group.Member
+     group.Manager" />
   </permissions>
 
   <!-- 'secret' group -->
   <permissions name="group.secret" title="Secret group type">
     <grant permission="zope.View"
-	   role="zope.Manager
-		 group.Member
-		 group.Manager" />
+     role="zope.Manager
+     group.Member
+     group.Manager" />
 
     <denyAll permission="zope.View" />
     <grant permission="zope.View"
-	   role="zope.Manager
-		 group.Member
-		 group.Manager" />
+     role="zope.Manager
+     group.Member
+     group.Manager" />
 
     <denyAll permission="zojax.AccessGroup" />
     <grant permission="zojax.AccessGroup"
-	   role="zope.Manager
-		 group.Member
-		 group.Manager" />
+     role="zope.Manager
+     group.Member
+     group.Manager" />
   </permissions>
 
 </configure>
