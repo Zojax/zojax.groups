@@ -13,7 +13,7 @@
     </div>
 
     <div class="z-portlet-item">
-      <div><tal:block content="info/members"/> Member(s) </div>
+      <div i18n:translate=""><tal:block i18n:name="members" content="info/members"/> Member(s) </div>
       <div><strong i18n:translate="">Owned by:</strong>
 	  <tal:block content="info/owner/title" /></div>
            <div><strong i18n:translate="">Created:</strong>

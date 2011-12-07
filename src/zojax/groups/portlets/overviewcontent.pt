@@ -6,7 +6,7 @@
 	     tal:attributes="src context/++resource++groupEmptyImage.png" />
 	<img tal:condition="not:info/default"
 	     tal:attributes="src string:${context/context/@@absolute_url}/++attribute++logo" />
-	<div><tal:block content="info/members"/> Member(s) </div>
+	<div i18n:translate=""><tal:block content="info/members" i18n:name="" /> Member(s) </div>
 	<div tal:condition="info/owner"><strong i18n:translate="">Owned by:</strong>
 	  <tal:block content="info/owner/title" /></div>
         <div><strong i18n:translate="">Created:</strong>

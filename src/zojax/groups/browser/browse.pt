@@ -9,9 +9,9 @@
 <form action="index.html" method="post" tal:condition="view/hasGroups">
   <input type="text" name="form.searchText" 
 	 tal:attributes="value request/form.searchText|nothing" />
-  <input type="submit" class="z-form-button"
+  <input type="submit" class="z-form-button" i18n:attributes="value"
 	 name="form.search" value="Search for a group" />
-  <input type="submit" class="z-form-cancelbutton"
+  <input type="submit" class="z-form-cancelbutton" i18n:attributes="value"
 	 name="form.search.clear" value="Clear"
 	 tal:condition="request/form.searchText|nothing" />
 </form>
@@ -42,11 +42,13 @@
 	       tal:content="info/title"></a>
 	  </h4>
 	  <div class="groups-group-description" tal:content="info/description"></div>
-	  <div class="groups-group-byline">
-	    <tal:block content="info/members"/> Member(s),
+	  <div class="groups-group-byline" i18n:translate="">
+	    <tal:block content="info/members" i18n:name="members" /> Member(s),
 	    Created on
-	    <tal:block content="structure formatter:date,medium:info/created" />
-	    <tal:block condition="not:info/created">Unknown</tal:block>
+	    <tal:block content="structure formatter:date,medium:info/created" i18n:name="created" />
+	    <tal:block i18n:name="created_unknow">
+	    <tal:block condition="not:info/created" i18n:translate="">Unknown</tal:block>
+	    </tal:block>
 	    <br />
 	    <tal:block content="info/gtype/title" />
 	  </div>
