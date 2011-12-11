@@ -50,7 +50,7 @@
 	    <tal:block condition="not:info/created" i18n:translate="">Unknown</tal:block>
 	    </tal:block>
 	    <br />
-	    <tal:block content="info/gtype/title" />
+	    <tal:block content="info/gtype/title" i18n:name="title" />
 	  </div>
 	</dd>
       </dl>
